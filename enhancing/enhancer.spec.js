@@ -112,4 +112,50 @@ describe('enhancer.js', () => {
             })
         })
     })
+
+    describe('get()', () => {
+        it('should should change item name to `[+enhancementVal] itemName` if enhancement is greater than 0', () => {
+            expect(enhancer.get({
+                name: "Poison Blade",
+                durability: 100,
+                enhancement: 16
+            })).toEqual({
+                name: "[+16] Poison Blade",
+                durability: 100,
+                enhancement: 16
+            });
+
+            expect(enhancer.get({
+                name: "Poison Arrow",
+                durability: 100,
+                enhancement: 6
+            })).toEqual({
+                name: "[+6] Poison Arrow",
+                durability: 100,
+                enhancement: 6
+            });
+        });
+
+        it('should return the same item without change if enhancement is equal to 0', () => {
+            expect(enhancer.get({
+                name: "Poison Blade",
+                durability: 100,
+                enhancement: 0
+            })).toEqual({
+                name: "Poison Blade",
+                durability: 100,
+                enhancement: 0
+            });
+
+            expect(enhancer.get({
+                name: "Poison Arrow",
+                durability: 100,
+                enhancement: 0
+            })).toEqual({
+                name: "Poison Arrow",
+                durability: 100,
+                enhancement: 0
+            });
+        });
+    })
 })
